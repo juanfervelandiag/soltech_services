@@ -13,10 +13,10 @@ const app = express();
 const angularApp = new AngularNodeAppEngine();
 
 /**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
+ * Ejemplo de endpoints de API REST con Express.
+ * Descomenta y define los endpoints según sea necesario.
  *
- * Example:
+ * Ejemplo:
  * ```ts
  * app.get('/api/{*splat}', (req, res) => {
  *   // Handle API request
@@ -48,8 +48,8 @@ app.use((req, res, next) => {
 });
 
 /**
- * Start the server if this module is the main entry point, or it is ran via PM2.
- * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
+ * Inicia el servidor si este módulo es el punto de entrada principal, o si se ejecuta a través de PM2.
+ * El servidor escucha en el puerto definido por la variable de entorno `PORT`, o por defecto en 4000.
  */
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
   const port = process.env['PORT'] || 4000;

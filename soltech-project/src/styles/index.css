@@ -1,0 +1,18 @@
+/* Base / Core */
+@import './variables.css';
+@import './global.css';
+
+/* Componentes Genéricos */
+@import './Button.css';
+@import './Forms.css';
+@import './Tables.css';
+@import './Cards.css';
+@import './Components.css';
+@import './Dialog.css';
+
+/* Layouts */
+@import './Pages.css';
+
+html {
+  scroll-behavior: smooth;
+}
