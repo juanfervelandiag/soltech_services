@@ -1,0 +1,10 @@
+<div class="toaster-container">
+  @for (toast of ts.toasts(); track toast.id) {
+    <div [class]="'toast toast-' + toast.type" (click)="ts.remove(toast.id)">
+      <div class="toast-content">
+        {{ toast.message }}
+      </div>
+      <button class="toast-close">&times;</button>
+    </div>
+  }
+</div>

@@ -1,22 +1,88 @@
-<h1>Home</h1>
-<p>Esta es la página principal.</p>
+<div class="home-page">
+  <!-- Hero Section -->
+  <section class="home-hero">
+    <div class="home-hero-container">
+      <div class="home-hero-grid">
+        <div>
+          <h1 class="home-hero-title">Soluciones Digitales para Impulsar tu Negocio</h1>
+          <p class="home-hero-subtitle">
+            Catálogo completo de servicios tecnológicos diseñados para pymes y emprendedores que
+            buscan innovar y crecer en el mundo digital.
+          </p>
+          <div class="home-hero-buttons">
+            <a routerLink="/services" class="home-hero-button-link">
+              <button class="button button-secondary w-full">Explorar servicios</button>
+            </a>
+            <a routerLink="/contact" class="home-hero-button-link">
+              <button class="button button-outline button-outline-white w-full">Contáctanos</button>
+            </a>
+          </div>
+        </div>
+        <div class="hidden">
+          <app-replacement-image
+            src="https://images.unsplash.com/photo-1726607424583-d1a2d1ff71df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwdHJhbnNmb3JtYXRpb24lMjBidXNpbmVzc3xlbnwxfHx8fDE3NzQwMjE4NDd8MA&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Digital transformation"
+            [imgStyle]="{
+              borderRadius: 'var(--radius-lg)',
+              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+            }"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
 
-<app-custom-button
-  text="Ir a contacto"
-  variant="secondary"
-  size="medium"
-  type="button"
-  (buttonClick)="goToContact()"
->
-</app-custom-button>
+  <!-- Sección de beneficios -->
+  <section class="home-benefits">
+    <div class="home-section-container">
+      <h2 class="home-section-title">¿Por qué elegirnos?</h2>
+      <p class="home-section-subtitle">
+        Trabajamos contigo para ofrecer soluciones que realmente marquen la diferencia
+      </p>
+      <div class="home-benefits-grid">
+        @for (benefit of benefits; track benefit.title) {
+          <div class="home-benefit-item">
+            <div class="home-benefit-icon" [innerHTML]="benefit.icon"></div>
+            <h3 class="home-benefit-title">{{ benefit.title }}</h3>
+            <p class="home-benefit-description">{{ benefit.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
 
-<br /><br />
+  <!-- Sección de servicios destacados -->
+  <section class="home-services">
+    <div class="home-section-container">
+      <h2 class="home-section-title">Servicios Destacados</h2>
+      <p class="home-section-subtitle">Descubre nuestros servicios más solicitados</p>
+      <div class="home-services-grid">
+        @for (service of featuredServices(); track service.id) {
+          <app-service-card
+            [service]="service"
+            [isFavorite]="svc.isFavorite(service.id)"
+            (toggleFavorite)="svc.toggleFavorite($event)"
+          />
+        }
+      </div>
+      <div class="text-center">
+        <a routerLink="/services" class="home-services-link">
+          <button class="button button-primary">Ver todos los servicios</button>
+        </a>
+      </div>
+    </div>
+  </section>
 
-<app-custom-button
-  text="Ver más"
-  variant="secondary"
-  size="small"
-  type="button"
-  (buttonClick)="onMoreInfoClick()"
->
-</app-custom-button>
+  <!-- Sección de llamada a la acción -->
+  <section class="home-cta">
+    <div class="home-cta-container">
+      <h2 class="home-cta-title">¿Listo para Transformar tu Negocio?</h2>
+      <p class="home-cta-subtitle">
+        Contáctanos hoy y descubre cómo podemos ayudarte a alcanzar tus objetivos
+      </p>
+      <a routerLink="/contact" class="home-cta-button">
+        <button class="button button-secondary">Solicitar Consulta Gratuita</button>
+      </a>
+    </div>
+  </section>
+</div>

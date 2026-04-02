@@ -1,17 +1,8 @@
-<nav>
-  <a routerLink="/">Inicio</a>
-  <a routerLink="/services">Servicios</a>
-  <a routerLink="/favorites">Favoritos</a>
-  <a routerLink="/admin">Administrar</a>
-  <a routerLink="/contact">Contacto</a>
-</nav>
-
-<hr />
-
-<router-outlet></router-outlet>
-
-<hr />
-
-<footer>
-  <p>Footer</p>
-</footer>
+<div class="layout-wrapper">
+  <app-header />
+  <main class="layout-main">
+    <router-outlet />
+  </main>
+  <app-footer />
+  <app-toaster />
+</div>
