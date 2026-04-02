@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { Toaster } from './components/toaster/toaster';
@@ -16,12 +16,15 @@ import { filter } from 'rxjs';
 export class App implements OnInit {
   title = 'SolTech Services';
   private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
 
   ngOnInit() {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      window.scrollTo(0, 0);
+      if (isPlatformBrowser(this.platformId)) {
+        window.scrollTo(0, 0);
+      }
     });
   }
 }
