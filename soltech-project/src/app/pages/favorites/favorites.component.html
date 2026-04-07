@@ -1,0 +1,43 @@
+<div class="page">
+  <div class="page-content">
+    <!-- Header -->
+    <div class="services-header">
+      <div class="favorites-header">
+        <svg xmlns="http://www.w3.org/2000/svg" class="favorites-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <h1 class="favorites-title">Mis Favoritos</h1>
+      </div>
+      <p class="favorites-subtitle">Servicios que has guardado para consultar más tarde</p>
+    </div>
+
+    <!-- Cuenta de favoritos-->
+    <div class="favorites-count">
+      <p>
+        Tienes <span class="favorites-count-number">{{ favoriteServices().length }}</span>
+        servicio{{ favoriteServices().length !== 1 ? 's' : '' }}
+        guardado{{ favoriteServices().length !== 1 ? 's' : '' }}
+      </p>
+    </div>
+
+    <!-- Cuadrícula de favoritos-->
+    @if (favoriteServices().length > 0) {
+      <div class="favorites-grid">
+        @for (service of favoriteServices(); track service.id) {
+          <app-service-card
+            [service]="service"
+            [isFavorite]="true"
+            (toggleFavorite)="svc.toggleFavorite($event)"
+          />
+        }
+      </div>
+    } @else {
+      <div class="empty-state card">
+        <svg xmlns="http://www.w3.org/2000/svg" class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <h3 class="empty-state-title">No tienes favoritos aún</h3>
+        <p class="empty-state-description">Explora nuestros servicios y guarda los que más te interesen</p>
+        <a routerLink="/services">
+          <button class="button button-primary">Explorar servicios</button>
+        </a>
+      </div>
+    }
+  </div>
+</div>
