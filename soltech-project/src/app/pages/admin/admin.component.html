@@ -1,0 +1,204 @@
+<div class="admin-page">
+  <div class="admin-container">
+    <div class="admin-header">
+      <div class="admin-header-content">
+        <h1>Administrar Servicios</h1>
+        <p>Gestiona el catálogo de servicios de SolTech Services</p>
+      </div>
+      <button (click)="openDialog()" class="button admin-add-button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="admin-add-button-icon" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
+        Nuevo Servicio
+      </button>
+    </div>
+
+    <div class="admin-table-container">
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Descripción</th>
+              <th>Tiempo Estimado</th>
+              <th class="text-right">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (svc.services().length === 0) {
+            <tr>
+              <td colspan="6" class="admin-td-empty">No hay servicios disponibles. Crea tu primer servicio.</td>
+            </tr>
+            } @else {
+            @for (service of svc.services(); track service.id) {
+            <tr>
+              <td class="admin-td-id">{{ service.id }}</td>
+              <td class="admin-td-name">{{ service.name }}</td>
+              <td><span class="admin-category-badge">{{ service.category }}</span></td>
+              <td class="admin-td-description truncate">{{ service.description }}</td>
+              <td class="admin-td-time">{{ service.estimatedTime }}</td>
+              <td>
+                <div class="admin-actions">
+                  <button (click)="openDialog(service)" class="admin-action-edit">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="admin-action-icon" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                    Editar
+                  </button>
+                  <button (click)="deleteService(service.id, service.name)" class="admin-action-delete">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="admin-action-icon" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="3 6 5 6 21 6" />
+                      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                      <path d="M10 11v6" />
+                      <path d="M14 11v6" />
+                      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+                    </svg>
+                    Eliminar
+                  </button>
+                </div>
+              </td>
+            </tr>
+            }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Total -->
+    <div class="admin-total">
+      Total de servicios: <span class="admin-total-number">{{ svc.services().length }}</span>
+    </div>
+  </div>
+
+  <!-- Dialog -->
+  @if (dialogOpen()) {
+  <div class="dialog-overlay" (click)="closeDialog()">
+    <div class="dialog-content dialog-content-2xl" (click)="$event.stopPropagation()">
+      <div class="dialog-header">
+        <div>
+          <h2 class="dialog-title">{{ editingId() !== null ? 'Editar Servicio' : 'Crear Nuevo Servicio' }}</h2>
+          <p class="dialog-description">{{ editingId() !== null ? 'Modifica los datos del servicio existente' :
+            'Completa el formulario para agregar un nuevo servicio' }}</p>
+        </div>
+        <button (click)="closeDialog()" class="dialog-close">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="admin-form">
+        <div class="admin-form-group">
+          <label for="name" class="admin-form-label">Nombre del Servicio *</label>
+          <input id="name" type="text" formControlName="name" class="admin-form-input"
+            placeholder="Ej: Desarrollo Web" />
+        </div>
+
+        <div class="admin-form-group">
+          <label for="category" class="admin-form-label">Categoría *</label>
+          <select id="category" formControlName="category" class="admin-form-select">
+            @for (cat of serviceCategories; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="description" class="admin-form-label">Descripción Corta *</label>
+          <textarea id="description" rows="2" formControlName="description" class="admin-form-textarea"
+            placeholder="Descripción breve del servicio"></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="fullDescription" class="admin-form-label">Descripción Completa *</label>
+          <textarea id="fullDescription" rows="3" formControlName="fullDescription" class="admin-form-textarea"
+            placeholder="Descripción detallada del servicio"></textarea>
+        </div>
+
+        <!-- Beneficios -->
+        <div class="admin-form-group">
+          <label class="admin-form-label">Beneficios *</label>
+          <div class="admin-form-array">
+            @for (benefit of benefits(); track $index) {
+            <div class="admin-form-array-item">
+              <input type="text" [value]="benefit"
+                (input)="updateArrayField('benefits', $index, $any($event.target).value)" class="admin-form-array-input"
+                [placeholder]="'Beneficio ' + ($index + 1)" />
+              @if (benefits().length > 1) {
+              <button type="button" (click)="removeArrayField('benefits', $index)" class="admin-form-array-remove">
+                <svg xmlns="http://www.w3.org/2000/svg" class="admin-form-array-remove-icon" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+              }
+            </div>
+            }
+            <button type="button" (click)="addArrayField('benefits')" class="admin-form-array-add">+ Agregar
+              beneficio</button>
+          </div>
+        </div>
+
+        <!-- Tecnologías -->
+        <div class="admin-form-group">
+          <label class="admin-form-label">Tecnologías *</label>
+          <div class="admin-form-array">
+            @for (tech of technologies(); track $index) {
+            <div class="admin-form-array-item">
+              <input type="text" [value]="tech"
+                (input)="updateArrayField('technologies', $index, $any($event.target).value)"
+                class="admin-form-array-input" [placeholder]="'Tecnología ' + ($index + 1)" />
+              @if (technologies().length > 1) {
+              <button type="button" (click)="removeArrayField('technologies', $index)" class="admin-form-array-remove">
+                <svg xmlns="http://www.w3.org/2000/svg" class="admin-form-array-remove-icon" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+              }
+            </div>
+            }
+            <button type="button" (click)="addArrayField('technologies')" class="admin-form-array-add">+ Agregar
+              tecnología</button>
+          </div>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="estimatedTime" class="admin-form-label">Tiempo Estimado *</label>
+          <input id="estimatedTime" type="text" formControlName="estimatedTime" class="admin-form-input"
+            placeholder="Ej: 4-8 semanas" />
+        </div>
+
+        <div class="admin-form-group">
+          <label for="imageUrl" class="admin-form-label">URL de Imagen *</label>
+          <input id="imageUrl" type="url" formControlName="imageUrl" class="admin-form-input"
+            placeholder="https://example.com/image.jpg" />
+          @if (form.get('imageUrl')?.value) {
+          <div class="admin-form-image-preview">
+            <img [src]="form.get('imageUrl')?.value" alt="Preview" (error)="$any($event.target).style.display='none'" />
+          </div>
+          }
+        </div>
+
+        <div class="admin-form-actions">
+          <button type="button" (click)="closeDialog()" class="admin-form-cancel">Cancelar</button>
+          <button type="submit" class="admin-form-submit">{{ editingId() !== null ? 'Guardar Cambios' : 'Crear Servicio'
+            }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  }
+</div>
