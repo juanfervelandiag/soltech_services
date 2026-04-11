@@ -1,5 +1,6 @@
 <div class="admin-page">
   <div class="admin-container">
+    <!-- Encabezado -->
     <div class="admin-header">
       <div class="admin-header-content">
         <h1>Administrar Servicios</h1>
@@ -15,6 +16,7 @@
       </button>
     </div>
 
+    <!-- Tabla de servicios -->
     <div class="admin-table-container">
       <div class="admin-table-wrapper">
         <table class="admin-table">
@@ -78,7 +80,7 @@
     </div>
   </div>
 
-  <!-- Dialog -->
+  <!-- Diálogo -->
   @if (dialogOpen()) {
   <div class="dialog-overlay" (click)="closeDialog()">
     <div class="dialog-content dialog-content-2xl" (click)="$event.stopPropagation()">

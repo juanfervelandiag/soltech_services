@@ -10,10 +10,10 @@ type ServiceFormData = Omit<Service, 'id'>;
   selector: 'app-admin',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './admin.component.html',
-  styleUrl: './admin.component.css'
+  templateUrl: './admin.html',
+  styleUrl: './admin.css'
 })
-export class AdminComponent {
+export class Administration {
   svc = inject(ServicesService);
   toast = inject(ToastService);
   private fb = new FormBuilder();
