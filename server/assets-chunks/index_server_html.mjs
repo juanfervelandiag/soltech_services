@@ -3,7 +3,7 @@ export default `<!doctype html>
   <head>
     <meta charset="utf-8"/>
     <title>Soltech Services</title>
-    <base href="https://github.com/juanfervelandiag/soltech_services/"/>
+    <base href="/soltech_services/"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
   <link rel="stylesheet" href="styles-N4MM2MOX.css"></head>

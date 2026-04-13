@@ -1,6 +1,6 @@
 
 export default {
-  basePath: 'https://github.com/juanfervelandiag/soltech_services',
+  basePath: '/soltech_services',
   allowedHosts: [],
   supportedLocales: {
   "en-US": ""
