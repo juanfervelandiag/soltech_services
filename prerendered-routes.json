@@ -1,0 +1,9 @@
+{
+  "routes": {
+    "/juanfervelandiag/soltech_services": {},
+    "/juanfervelandiag/soltech_services/admin": {},
+    "/juanfervelandiag/soltech_services/contact": {},
+    "/juanfervelandiag/soltech_services/favorites": {},
+    "/juanfervelandiag/soltech_services/services": {}
+  }
+}
