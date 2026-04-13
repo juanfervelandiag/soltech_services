@@ -39,6 +39,7 @@ export class ServicesService {
   }
 
   getServiceById(id: number): Service | undefined {
+    debugger;
     return this._services().find(s => s.id === id);
   }
 

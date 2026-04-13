@@ -1,0 +1,155 @@
+@if (service()) {
+  <div class="service-detail-page">
+    <!-- Back Button -->
+    <div class="service-detail-nav">
+      <div class="service-detail-nav-container">
+        <a routerLink="/services" class="service-detail-back-link">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="service-detail-back-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+          </svg>
+          Volver al listado
+        </a>
+      </div>
+    </div>
+
+    <!-- Service Detail -->
+    <div class="service-detail-container">
+      <div class="service-detail-grid">
+        <!-- Image -->
+        <div>
+          <div class="service-detail-image-wrapper">
+            <app-replacement-image
+              [src]="service()!.imageUrl"
+              [alt]="service()!.name"
+              className="service-detail-image"
+            />
+            <div class="service-detail-category-badge">{{ service()!.category }}</div>
+          </div>
+        </div>
+
+        <!-- Info -->
+        <div class="service-detail-info">
+          <h1 class="service-detail-title">{{ service()!.name }}</h1>
+
+          <div class="service-detail-time">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="service-detail-time-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span>{{ service()!.estimatedTime }}</span>
+          </div>
+
+          <p class="service-detail-description">{{ service()!.fullDescription }}</p>
+
+          <!-- Benefits -->
+          <div class="service-detail-benefits">
+            <h2 class="service-detail-section-title">Beneficios</h2>
+            <ul class="service-detail-benefits-list">
+              @for (benefit of service()!.benefits; track benefit) {
+                <li class="service-detail-benefit">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="service-detail-benefit-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                  <span class="service-detail-benefit-text">{{ benefit }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+
+          <!-- Technologies -->
+          <div class="service-detail-technologies">
+            <h2 class="service-detail-section-title">Tecnologías Relacionadas</h2>
+            <div class="service-detail-tech-list">
+              @for (tech of service()!.technologies; track tech) {
+                <span class="service-detail-tech-badge">{{ tech }}</span>
+              }
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="service-detail-actions">
+            <a routerLink="/contact" class="service-detail-action-link">
+              <button class="button button-primary w-full">Contactar ahora</button>
+            </a>
+            <button
+              class="button button-outline service-detail-favorite-button"
+              (click)="svc.toggleFavorite(service()!.id)"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                [attr.fill]="svc.isFavorite(service()!.id) ? 'currentColor' : 'none'"
+                [class]="
+                  'service-detail-favorite-icon' + (svc.isFavorite(service()!.id) ? ' active' : '')
+                "
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                />
+              </svg>
+              {{ svc.isFavorite(service()!.id) ? 'En favoritos' : 'Agregar a favoritos' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Services -->
+      @if (relatedServices().length > 0) {
+        <div class="service-detail-related">
+          <h2 class="service-detail-related-title">Servicios Relacionados</h2>
+          <div class="service-detail-related-grid">
+            @for (related of relatedServices(); track related.id) {
+              <app-service-card
+                [service]="related"
+                [isFavorite]="svc.isFavorite(related.id)"
+                (toggleFavorite)="svc.toggleFavorite($event)"
+              />
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+} @else {
+  <div class="service-detail-not-found">
+    <div class="service-detail-not-found-content">
+      <h2 class="service-detail-not-found-title">Servicio no encontrado</h2>
+      <a routerLink="/services">
+        <button class="button button-primary">Volver a servicios</button>
+      </a>
+    </div>
+  </div>
+}
