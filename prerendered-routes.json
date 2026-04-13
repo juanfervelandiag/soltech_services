@@ -1,9 +1,0 @@
-{
-  "routes": {
-    "/soltech_services": {},
-    "/soltech_services/admin": {},
-    "/soltech_services/contact": {},
-    "/soltech_services/favorites": {},
-    "/soltech_services/services": {}
-  }
-}
