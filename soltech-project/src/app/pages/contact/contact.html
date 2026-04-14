@@ -47,7 +47,7 @@
                   placeholder="Tu nombre completo"
                 />
                 @if (isInvalid('name')) {
-                  <p class="form-error">El nombre es requerido</p>
+                  <p class="form-error">{{ getNameError() }}</p>
                 }
               </div>
 

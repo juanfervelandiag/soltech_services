@@ -1,5 +1,4 @@
 import { Component, inject, signal } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ToastService } from '../../services/toast';
 
@@ -11,13 +10,20 @@ import { ToastService } from '../../services/toast';
   styleUrl: './contact.css'
 })
 export class Contact {
-  private fb = new FormBuilder();
+  private fb = inject(FormBuilder);
   private toast = inject(ToastService);
   submitted = signal(false);
 
   form = this.fb.group({
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
+    name: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÿ\u00f1\u00d1\s]+$/)]],
+    email: [
+      '',
+      [
+        Validators.required,
+        Validators.email,
+        Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)
+      ]
+    ],
     subject: ['', Validators.required],
     message: ['', [Validators.required, Validators.minLength(10)]]
   });
@@ -27,10 +33,17 @@ export class Contact {
     return !!(ctrl && ctrl.invalid && ctrl.touched);
   }
 
+  getNameError(): string {
+    const ctrl = this.form.get('name');
+    if (ctrl?.errors?.['required']) return 'El nombre es requerido';
+    if (ctrl?.errors?.['pattern']) return 'El nombre solo puede contener letras';
+    return '';
+  }
+
   getEmailError(): string {
     const ctrl = this.form.get('email');
     if (ctrl?.errors?.['required']) return 'El correo es requerido';
-    if (ctrl?.errors?.['email']) return 'El correo no es válido';
+    if (ctrl?.errors?.['email'] || ctrl?.errors?.['pattern']) return 'El correo no es válido';
     return '';
   }
 
@@ -55,8 +68,6 @@ export class Contact {
       this.toast.error('Por favor, completa el formulario correctamente.');
     }
   }
-
-  private sanitizer = inject(DomSanitizer);
 
   contactInfo: { id: string; title: string; value: string; link: string | null }[] = [
     {

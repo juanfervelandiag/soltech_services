@@ -16,7 +16,7 @@ type ServiceFormData = Omit<Service, 'id'>;
 export class Administration {
   svc = inject(ServicesService);
   toast = inject(ToastService);
-  private fb = new FormBuilder();
+  private fb = inject(FormBuilder);
 
   dialogOpen = signal(false);
   editingId = signal<number | null>(null);
