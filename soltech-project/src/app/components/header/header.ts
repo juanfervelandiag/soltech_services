@@ -20,6 +20,7 @@ export class Header {
     { name: 'Inicio', path: '/' },
     { name: 'Servicios', path: '/services' },
     { name: 'Favoritos', path: '/favorites' },
+    { name: 'Administración', path: '/admin' },
     { name: 'Contacto', path: '/contact' },
   ];
 
