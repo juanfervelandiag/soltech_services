@@ -1,0 +1,150 @@
+/* Estilos Comunes de Páginas */
+.page {
+  min-height: 100vh;
+  background-color: var(--color-gray-50);
+  overflow-x: hidden;
+}
+
+.page.page-full-height {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-12) 0;
+}
+
+.page-header {
+  background: linear-gradient(to right, var(--color-gray-900), var(--color-gray-800));
+  color: var(--color-white);
+  padding: var(--spacing-16) 0;
+}
+
+.page-header-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .page-header-content {
+    padding: 0 var(--spacing-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-header-content {
+    padding: 0 var(--spacing-8);
+  }
+}
+
+.page-title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-4);
+}
+
+.page-subtitle {
+  font-size: var(--font-size-xl);
+  color: var(--color-gray-300);
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.page-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-12) var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .page-content {
+    padding: var(--spacing-12) var(--spacing-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-content {
+    padding: var(--spacing-12) var(--spacing-8);
+  }
+}
+
+/* Layouts de Grid */
+.grid {
+  display: grid;
+  gap: var(--spacing-8);
+  align-items: start;
+}
+
+.grid-1 {
+  grid-template-columns: 1fr;
+}
+
+.grid-2 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.grid-3 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Estilos de Layout */
+.layout-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-main {
+  flex: 1;
+}
+
+/* Clases de Utilidad */
+.w-full {
+  width: 100%;
+}
+
+.sticky-top {
+  position: sticky;
+  top: 6rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.icon-sm {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.icon-md {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon-lg {
+  width: 2rem;
+  height: 2rem;
+}

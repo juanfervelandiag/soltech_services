@@ -1,0 +1,204 @@
+/* Estilos de Diálogo/Modal - Componente Dialog de Radix UI */
+
+/* Overlay del Diálogo - Capa oscura de fondo */
+[data-slot="dialog-overlay"] {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Animaciones del Overlay */
+[data-slot="dialog-overlay"][data-state="open"] {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+[data-slot="dialog-overlay"][data-state="closed"] {
+  animation: fadeOut 0.2s ease-in-out;
+}
+
+/* Contenido del Diálogo - El modal real */
+[data-slot="dialog-content"] {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  display: grid;
+  width: 100%;
+  max-width: calc(100% - 2rem);
+  gap: 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
+  background-color: var(--color-white);
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (min-width: 640px) {
+  [data-slot="dialog-content"] {
+    max-width: 32rem;
+  }
+}
+
+/* Animaciones del Contenido */
+[data-slot="dialog-content"][data-state="open"] {
+  animation: dialogZoomIn 0.2s ease-in-out;
+}
+
+[data-slot="dialog-content"][data-state="closed"] {
+  animation: dialogZoomOut 0.2s ease-in-out;
+}
+
+/* Botón de Cerrar */
+[data-slot="dialog-content"] [data-slot="dialog-close"] {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-radius: 0.25rem;
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in-out;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--color-gray-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-slot="dialog-content"] [data-slot="dialog-close"]:hover {
+  opacity: 1;
+  background-color: var(--color-gray-100);
+}
+
+[data-slot="dialog-content"] [data-slot="dialog-close"]:focus {
+  outline: 2px solid var(--color-gray-900);
+  outline-offset: 2px;
+}
+
+[data-slot="dialog-content"] [data-slot="dialog-close"] svg {
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+}
+
+/* Encabezado del Diálogo */
+[data-slot="dialog-header"] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  [data-slot="dialog-header"] {
+    text-align: left;
+  }
+}
+
+/* Título del Diálogo */
+[data-slot="dialog-title"] {
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+}
+
+/* Descripción del Diálogo */
+[data-slot="dialog-description"] {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+}
+
+/* Pie del Diálogo */
+[data-slot="dialog-footer"] {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  [data-slot="dialog-footer"] {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialogZoomIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes dialogZoomOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+/* Clases personalizadas para el contenido del diálogo con diferentes tamaños */
+.dialog-content-sm {
+  max-width: 28rem;
+}
+
+.dialog-content-md {
+  max-width: 32rem;
+}
+
+.dialog-content-lg {
+  max-width: 42rem;
+}
+
+.dialog-content-xl {
+  max-width: 56rem;
+}
+
+.dialog-content-2xl {
+  max-width: 42rem;
+}
+
+/* Solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

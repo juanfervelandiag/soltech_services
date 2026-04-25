@@ -1,0 +1,130 @@
+/* Sub-componentes / Elementos Compartidos */
+
+/* Estado Vacío */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-16) var(--spacing-4);
+}
+
+.empty-state-icon {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-gray-400);
+  margin: 0 auto var(--spacing-4);
+}
+
+.empty-state-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-2);
+}
+
+.empty-state-description {
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-6);
+}
+
+/* Enlace de Retorno */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-gray-600);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  margin-bottom: var(--spacing-4);
+}
+
+.back-link:hover {
+  color: var(--color-amber-600);
+}
+
+/* Etiquetas / Badges */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem var(--spacing-2);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.tag-amber {
+  background-color: var(--color-amber-100);
+  color: var(--color-amber-800);
+}
+
+/* Items de Información de Contacto */
+.contact-info-grid {
+  display: grid;
+  gap: var(--spacing-6);
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.contact-info-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--color-amber-100);
+  color: var(--color-amber-600);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-info-content {
+  margin-left: var(--spacing-4);
+}
+
+.contact-info-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-1);
+}
+
+.contact-info-value {
+  color: var(--color-gray-600);
+}
+
+.contact-info-link {
+  color: var(--color-gray-600);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.contact-info-link:hover {
+  color: var(--color-amber-600);
+}
+
+/* Mensaje de Éxito */
+.success-message {
+  background-color: var(--color-amber-50);
+  border: 1px solid var(--color-amber-200);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
+.success-message-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.success-message-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-amber-600);
+}
+
+.success-message-text {
+  color: var(--color-amber-800);
+  font-weight: var(--font-weight-medium);
+}

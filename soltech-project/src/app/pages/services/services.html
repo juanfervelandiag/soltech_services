@@ -1,0 +1,76 @@
+<div class="page">
+  <div class="page-content">
+    <!-- Header -->
+    <div class="services-header">
+      <h1 class="services-title">Catálogo de Servicios</h1>
+      <p class="services-subtitle">Explora nuestra amplia gama de soluciones tecnológicas</p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="search-icon icon-sm"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input
+        type="text"
+        placeholder="Buscar servicios..."
+        [ngModel]="searchQuery()"
+        (ngModelChange)="searchQuery.set($event)"
+        class="search-input"
+      />
+    </div>
+
+    <!-- Category Filters -->
+    <div class="filter-container">
+      <div class="filter-buttons">
+        @for (category of categories; track category) {
+          <button
+            (click)="selectedCategory.set(category)"
+            [class]="'filter-button' + (selectedCategory() === category ? ' active' : '')"
+          >
+            {{ category }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Results Count -->
+    <div class="services-count">
+      <p>
+        Mostrando
+        <span class="services-count-number">{{ filteredServices().length }}</span> servicio{{
+          filteredServices().length !== 1 ? 's' : ''
+        }}
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    @if (filteredServices().length > 0) {
+      <div class="grid grid-3">
+        @for (service of filteredServices(); track service.id) {
+          <app-service-card
+            [service]="service"
+            [isFavorite]="svc.isFavorite(service.id)"
+            (toggleFavorite)="svc.toggleFavorite($event)"
+          />
+        }
+      </div>
+    } @else {
+      <div class="empty-state">
+        <p class="empty-state-description">
+          No se encontraron servicios que coincidan con tu búsqueda.
+        </p>
+      </div>
+    }
+  </div>
+</div>

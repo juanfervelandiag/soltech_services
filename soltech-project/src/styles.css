@@ -1,0 +1,75 @@
+/* Estilos Globales*/
+@import './styles/index.css';
+
+/* Estilos para el Dialog */
+.dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.dialog-content {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-xl, 0 20px 60px rgba(0, 0, 0, 0.3));
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 40rem;
+}
+
+.dialog-content-2xl {
+    max-width: 56rem;
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+}
+
+.dialog-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.dialog-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0.25rem 0 0;
+}
+
+.dialog-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.dialog-close:hover {
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+}
+
+.dialog-close svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}

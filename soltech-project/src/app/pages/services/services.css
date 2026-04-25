@@ -1,0 +1,25 @@
+/* Estilos para la página de servicios */
+.services-header {
+    margin-bottom: var(--spacing-8);
+}
+
+.services-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-4);
+}
+
+.services-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray-600);
+}
+
+.services-count {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-6);
+}
+
+.services-count-number {
+    font-weight: var(--font-weight-semibold);
+}
