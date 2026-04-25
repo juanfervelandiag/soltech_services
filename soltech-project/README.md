@@ -77,4 +77,4 @@ Sigue estos pasos para ejecutar el proyecto en tu entorno local:
 
 ## 👨‍💻 Acerca del Proyecto
 
-Proyecto desarrollado como parte de las entregas del módulo Front End del curso Ingeniería de Software del Politécnico Gran Colombiano (Abril 2026) - Grupo 11.
+Proyecto desarrollado como parte de las entregas del módulo Front End de la carrera de Ingeniería de Software del Politécnico Gran Colombiano (Abril 2026). Subgrupo 11.
