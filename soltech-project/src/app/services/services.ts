@@ -38,9 +38,9 @@ export class ServicesService {
     localStorage.setItem(FAVORITES_KEY, JSON.stringify(this._favorites()));
   }
 
-  getServiceById(id: number): Service | undefined {
-    debugger;
-    return this._services().find(s => s.id === id);
+  getServiceById(id: number | string): Service | undefined {
+    const targetId = Number(id);
+    return this._services().find(s => Number(s.id) === targetId);
   }
 
   addService(service: Omit<Service, 'id'>): void {
@@ -49,15 +49,17 @@ export class ServicesService {
     this._saveServices();
   }
 
-  updateService(id: number, service: Omit<Service, 'id'>): void {
+  updateService(id: number | string, service: Omit<Service, 'id'>): void {
+    const targetId = Number(id);
     this._services.update(list =>
-      list.map(s => (s.id === id ? { ...service, id } : s))
+      list.map(s => (Number(s.id) === targetId ? { ...service, id: targetId } : s))
     );
     this._saveServices();
   }
 
-  deleteService(id: number): void {
-    this._services.update(list => list.filter(s => s.id !== id));
+  deleteService(id: number | string): void {
+    const targetId = Number(id);
+    this._services.update(list => list.filter(s => Number(s.id) !== targetId));
     this._saveServices();
   }
 

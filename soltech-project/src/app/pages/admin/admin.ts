@@ -90,7 +90,7 @@ export class Administration {
   }
 
   deleteService(id: number, name: string): void {
-    if (confirm(`¿Estás seguro de eliminar el servicio "${name}"?`)) {
+    if (window.confirm(`¿Estás seguro de eliminar el servicio "${name}"?`)) {
       this.svc.deleteService(id);
       this.toast.success('Servicio eliminado correctamente');
     }
